@@ -12,24 +12,31 @@ class _Hats:
                INSERT INTO hats (id, topping, supplier, quantity) VALUES (?, ?, ?, ?)
            """, [hat.id, hat.topping, hat.supplier, hat.quantity])
 
-    def find(self, hat_id):
+    def findall(self, _topping):
+        c = self._conn.cursor()
+        c.execute("""
+            SELECT id, topping, supplier, quantity FROM hats WHERE topping = ?
+        """, [_topping])
+
+        return c.fetchall()
+
+    def find(self, _id):
         c = self._conn.cursor()
         c.execute("""
             SELECT id, topping, supplier, quantity FROM hats WHERE id = ?
-        """, [hat_id])
+        """, [_id])
 
         return Hats(*c.fetchone())
 
-    def update(self, hat):
+    def update(self, _quantity, _id):
         self._conn.execute("""
                        UPDATE hats SET quantity=(?) WHERE id=(?)
-                   """, [hat.quantity, hat.id])
+                   """, [_quantity, _id])
 
     def remove(self, hat):
         self._conn.execute("""
                 DELETE FROM hats   WHERE id=(?) 
         """, [hat.id])
-
 
 
 class _Suppliers:

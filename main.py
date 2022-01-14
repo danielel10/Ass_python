@@ -24,12 +24,43 @@ def start(config_path, orders_path):
                 num_of_hats = num_of_hats - 1
                 hat = Hats(id, topping, supplier, quantity)
                 repo.hats.insert(hat)
+            elif num_of_suppliers != 0:
+                supplier_details = line.split()[0]
+                supplier_details = line.split(",")
+                id = (int)(supplier_details[0])
+                name = supplier_details[1]
+                num_of_suppliers = num_of_suppliers - 1
+                supplier = Suppliers(id, name)
+                repo.suppliers.insert(supplier)
+    with open(orders_path) as orders:
+        lines = orders.readlines()
+        orderid = 1
+        count = 1
+        for line in lines:
+            order_details = line.split()[0]
+            order_details = line.split(",")
+            location = order_details[0]
+            topping = order_details[1]
+            if count != len(lines):
+                topping = topping[0:len(topping)-1]
+            hats = repo.hats.findall(topping)
+            hat_id = findminsupplier(hats)
+            hat = repo.hats.find(hat_id)
+            quantity = hat.quantity - 1
+            repo.hats.update(quantity, hat_id)
+            count = count + 1
 
-    # while(range(num_of_suppliers - 1) != num_of_suppliers):
-    #     (id, name) = os.path.splitext(os.listdir(config_path))
-    #     supplier = Suppliers.__init__(id, name)
 
 
+
+
+def findminsupplier(list_of_tuples):
+    supplier_id = list_of_tuples[0][2]
+    hat_id = list_of_tuples[0][0]
+    for hat in list_of_tuples:
+        if hat[2] < supplier_id:
+            hat_id = hat[0]
+    return hat_id
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
