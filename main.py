@@ -1,12 +1,10 @@
 from DTO import Hats, Suppliers, Orders
 from Repository import repo
+import sys
 
-import os
-
-def start(config_path, orders_path):
-    repo.create_tables()
-    with open('Summary.txt', 'w') as summary:
-        with open(config_path) as config:
+def start():
+    with open(sys.argv[3], 'w') as summary:
+        with open(sys.argv[1]) as config:
             firstline = config.readline()
             param = firstline.split()[0]
             param = param.split(",")
@@ -25,6 +23,7 @@ def start(config_path, orders_path):
                     num_of_hats = num_of_hats - 1
                     hat = Hats(id, topping, supplier, quantity)
                     repo.hats.insert(hat)
+                    count = count + 1
                 elif num_of_suppliers != 0:
                     supplier_details = line.split()[0]
                     supplier_details = line.split(",")
@@ -35,7 +34,8 @@ def start(config_path, orders_path):
                     num_of_suppliers = num_of_suppliers - 1
                     supplier = Suppliers(id, name)
                     repo.suppliers.insert(supplier)
-        with open(orders_path) as orders:
+                    count = count + 1
+        with open(sys.argv[2]) as orders:
             lines = orders.readlines()
             orderid = 1
             count = 1
@@ -56,8 +56,9 @@ def start(config_path, orders_path):
                 summary.write(f'{topping},{supplier.name},{location}\n')
                 repo.hats.update(quantity, hat_id)
                 count = count + 1
-                repo.orders.insert(Orders(orderid, location, topping))
+                repo.orders.insert(Orders(orderid, location, hat_id))
                 orderid = orderid + 1
+
 
 
 
@@ -73,5 +74,5 @@ def findminsupplier(list_of_tuples):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-        start("config.txt", "orders.txt")
+        start()
 

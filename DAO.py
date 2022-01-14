@@ -66,8 +66,10 @@ class _Orders:
             INSERT INTO orders (id, location, hat) VALUES (?, ?, ?)
         """, [order.id, order.location, order.hat])
 
-    # def find_all(self):
-    #     c = self._conn.cursor()
-    #     all = c.execute("""
-    #         SELECT student_id, assignment_num, grade FROM grades
-    #     """).fetchall()
+    def findall(self):
+        c = self._conn.cursor()
+        c.execute("""
+            SELECT id, location, hat FROM orders
+        """)
+
+        return c.fetchall()

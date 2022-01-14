@@ -1,16 +1,18 @@
 # The Repository
 import atexit
 import sqlite3
+import sys
 
 from DAO import _Hats, _Suppliers, _Orders
 
 
 class _Repository:
     def __init__(self):
-        self._conn = sqlite3.connect('true_database.db')
+        self._conn = sqlite3.connect(sys.argv[4])
         self.hats = _Hats(self._conn)
         self.suppliers = _Suppliers(self._conn)
         self.orders = _Orders(self._conn)
+        self.create_tables()
 
     def _close(self):
         self._conn.commit()

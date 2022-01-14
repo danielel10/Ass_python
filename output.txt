@@ -15,11 +15,11 @@ mushrooms,Scrabbles,Tel-Aviv
 garlic,Scrabbles,Tel-Aviv
 mushrooms,Scrabbles,Tel-Aviv
 garlic,Scrabbles,Tel-Aviv
-pineapple,BigSpoon,Tel-Aviv
-pineapple,BigSpoon,Tel-Aviv
-onion,BigSpoon,Bat-Yam
-onion,BigSpoon,Bat-Yam
-onion,BigSpoon,Bat-Yam
+pineapple,BigSpoons,Tel-Aviv
+pineapple,BigSpoons,Tel-Aviv
+onion,BigSpoons,Bat-Yam
+onion,BigSpoons,Bat-Yam
+onion,BigSpoons,Bat-Yam
 lettuce,TeaSpoons,Bat-Yam
 lettuce,TeaSpoons,Bat-Yam
 lettuce,TeaSpoons,Bat-Yam
