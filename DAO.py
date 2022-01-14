@@ -33,10 +33,10 @@ class _Hats:
                        UPDATE hats SET quantity=(?) WHERE id=(?)
                    """, [_quantity, _id])
 
-    def remove(self, hat):
+    def remove(self, _id):
         self._conn.execute("""
                 DELETE FROM hats   WHERE id=(?) 
-        """, [hat.id])
+        """, [_id])
 
 
 class _Suppliers:
