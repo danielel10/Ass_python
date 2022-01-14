@@ -18,27 +18,27 @@ class _Repository:
 
     def create_tables(self):
         self._conn.executescript("""
-        CREATE TABLE hats (
-            id      INT         PRIMARY KEY,
-            topping    TEXT        NOT NULL,
-            supplier    INT,
-            quantity INT        NOT NULL,
-            FOREIGN KEY(supplier)     REFERENCES suppliers(id),     
-        );
-
-        CREATE TABLE suppliers (
-            id                 INT     PRIMARY KEY,
-            name     TEXT    NOT NULL
-        );
-
-        CREATE TABLE orders (
-            id      INT     PRIMARY KEY,
-            location  TEXT     NOT NULL,
-            hat           INT,
-
-            FOREIGN KEY(hat)     REFERENCES hats(id),
-            
+            CREATE TABLE hats (
+                id      INT         PRIMARY KEY,
+                topping    TEXT        NOT NULL,
+                supplier    INT,
+                quantity INT        NOT NULL,
+                FOREIGN KEY(supplier)     REFERENCES suppliers(id)     
             );
+    
+            CREATE TABLE suppliers (
+                id                 INT     PRIMARY KEY,
+                name     TEXT    NOT NULL
+            );
+    
+            CREATE TABLE orders (
+                id      INT     PRIMARY KEY,
+                location  TEXT     NOT NULL,
+                hat           INT,
+    
+                FOREIGN KEY(hat)     REFERENCES hats(id)
+                
+                );
     """)
 
 
